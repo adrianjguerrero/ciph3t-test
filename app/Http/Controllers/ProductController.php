@@ -14,7 +14,6 @@ class ProductController extends Controller
     {
         $products = Product::all();
         return response()->json($products);
-
     }
 
     /**
@@ -30,7 +29,19 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'currency_id' => 'integer|exists:currencies,id',
+            'tax_cost' => 'required|numeric',
+            'manufacturing_cost' => 'required|numeric',
+        ]);
+
+        $product = Product::create($validatedData);
+        
+        
+        return response()->json($product, 201);
     }
 
     /**
@@ -38,7 +49,8 @@ class ProductController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        return response()->json($product);
     }
 
     /**
@@ -54,7 +66,19 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validatedData = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'price' => 'required|numeric',
+            'currency_id' => 'integer|exists:currencies,id',
+            'tax_cost' => 'required|numeric',
+            'manufacturing_cost' => 'required|numeric',
+        ]);
+
+        $product = Product::findOrFail($id);
+        $product->update($validatedData);
+
+        return response()->json($product);
     }
 
     /**
@@ -62,6 +86,9 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $product->delete();
+
+        return response()->json(['message' => 'Product deleted successfully']);
     }
 }
