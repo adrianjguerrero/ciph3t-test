@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('description')->nullable();
             $table->decimal('price', 10, 2);
-            $table->unsignedBigInteger('currency_id');
+            $table->unsignedBigInteger('currency_id')->default(1);
             $table->decimal('tax_cost', 10, 2)->default(0);
             $table->decimal('manufacturing_cost', 10, 2)->default(0);
             $table->timestamps();
