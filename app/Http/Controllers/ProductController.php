@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Products as Product;
 use App\Models\Prices;
 use App\Models\Currencies;
+use Illuminate\Validation\ValidationException;
 
 class ProductController extends Controller
 {
@@ -18,27 +19,28 @@ class ProductController extends Controller
         return response()->json($products);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+
 
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric',
-            'currency_id' => 'integer|exists:currencies,id',
-            'tax_cost' => 'required|numeric',
-            'manufacturing_cost' => 'required|numeric',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'price' => 'required|numeric',
+                'currency_id' => 'integer|exists:currencies,id',
+                'tax_cost' => 'required|numeric',
+                'manufacturing_cost' => 'required|numeric',
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $e->errors(),
+            ], 422);
+        }
 
         $product = Product::create($validatedData);
         
@@ -56,26 +58,25 @@ class ProductController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'description' => 'nullable|string',
-            'price' => 'required|numeric',
-            'currency_id' => 'integer|exists:currencies,id',
-            'tax_cost' => 'required|numeric',
-            'manufacturing_cost' => 'required|numeric',
-        ]);
+        try {
+            $validatedData = $request->validate([
+                'name' => 'required|string|max:255',
+                'description' => 'nullable|string',
+                'price' => 'required|numeric',
+                'currency_id' => 'integer|exists:currencies,id',
+                'tax_cost' => 'required|numeric',
+                'manufacturing_cost' => 'required|numeric',
+            ]);
+        } catch (ValidationException $e) {
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $e->errors(),
+            ], 422);
+        }
 
         $product = Product::findOrFail($id);
         $product->update($validatedData);
@@ -109,11 +110,16 @@ class ProductController extends Controller
     {
         $validatedData = $request->validate([
             'currency_id' => 'integer|exists:currencies,id',
+        ], [
+            'currency_id.integer' => 'El ID de la moneda debe ser un número entero.',
+            'currency_id.exists' => 'La moneda especificada no existe en la base de datos.',
         ]);
+
         $product = Product::findOrFail($id);
         if (!$product) {
             return response()->json(['message' => 'Product not found'], 404);
         }
+
         // Check if the price already exists for the product and currency
         $existingPrice = Prices::where('product_id', $id)
             ->where('currency_id', $validatedData['currency_id'])
