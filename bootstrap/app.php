@@ -27,9 +27,7 @@ return Application::configure(basePath: dirname(__DIR__))
         ]);
 
         $middleware->validateCsrfTokens(except: [
-            '/products',
-            '/products/*',
-            # TODO: proteccion de rutas
+            '/api/*',
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
