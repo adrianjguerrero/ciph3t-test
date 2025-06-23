@@ -13,7 +13,7 @@ Antes de comenzar, asegúrate de tener instalados los siguientes requisitos:
 ### 1. Clonar el repositorio
 Clona este repositorio en tu máquina local:
 ```bash
-git clone <URL_DEL_REPOSITORIO>
+git clone https://github.com/adrianjguerrero/ciph3t-test.git
 ```
 
 ### 2. Instalar dependencias
