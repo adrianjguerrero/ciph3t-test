@@ -1,0 +1,331 @@
+type: collection.insomnia.rest/5.0
+name: ciph3r test
+meta:
+  id: wrk_d29c36173deb4a44a360321d02cf0d54
+  created: 1750460513154
+  modified: 1750460513154
+  description: ""
+collection:
+  - url: "{{ _.baseurl }}login"
+    name: login
+    meta:
+      id: req_a8fe0f51369143e0be578c0b0f3fcea0
+      created: 1750460565115
+      modified: 1750697378721
+      isPrivate: false
+      description: ""
+      sortKey: -1750460672800
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"email":"user@example.com",
+        	"password":"pass123"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.2.0
+    scripts:
+      afterResponse: |-
+        
+        const jsonBody = insomnia.response.json();
+
+        const token = jsonBody.token
+
+        insomnia.environment.set("token", token);
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseurl }}products/5"
+    name: get a product
+    meta:
+      id: req_d8fa8079c33542f6803694b8c45b62fe
+      created: 1750460672600
+      modified: 1750697258098
+      isPrivate: false
+      description: ""
+      sortKey: -1750460672750
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+      prefix: Bearer
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseurl }}products/"
+    name: create product
+    meta:
+      id: req_2556fa578ccb49b1b47bde91bd8c75cd
+      created: 1750461132459
+      modified: 1750697325106
+      isPrivate: false
+      description: ""
+      sortKey: -1750460672700
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name":"xd"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.2.0
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+      prefix: "Bearer "
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseurl }}products/1"
+    name: delete product
+    meta:
+      id: req_3270c94e7bf44f84af66c3797308ebcd
+      created: 1750462660306
+      modified: 1750697343326
+      isPrivate: false
+      description: ""
+      sortKey: -1750460565015
+    method: DELETE
+    body:
+      mimeType: application/json
+      text: ""
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.2.0
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+      prefix: Bearer
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseurl }}products/1/edit/"
+    name: edit product
+    meta:
+      id: req_b4156c5eef3d4ab28839fc99e742f397
+      created: 1750464260016
+      modified: 1750697336298
+      isPrivate: false
+      description: ""
+      sortKey: -1750460672650
+    method: PUT
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"name":"xd",
+        	"description":"aaa",
+        	"price":1,
+        	"tax_cost":1,
+        	"manufacturing_cost":1
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.2.0
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+      prefix: Bearer
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseurl }}products/5/prices"
+    name: get a product price
+    meta:
+      id: req_d51c1e85488847e9982bb2503459f3b8
+      created: 1750466859646
+      modified: 1750697286413
+      isPrivate: false
+      description: ""
+      sortKey: -1750460672725
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+      prefix: Bearer
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseurl }}products/5/prices"
+    name: set a product price
+    meta:
+      id: req_c5f79abc982a4a63979adba5112d5dd1
+      created: 1750467185547
+      modified: 1750697299095
+      isPrivate: false
+      description: ""
+      sortKey: -1750460672712.5
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"currency_id":2
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/11.2.0
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+      prefix: Bearer
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: "{{ _.baseurl }}products"
+    name: all products
+    meta:
+      id: req_3e473c98bec341799967ab3abf01d8be
+      created: 1750615350529
+      modified: 1750697187700
+      isPrivate: false
+      description: ""
+      sortKey: -1750460672775
+    method: GET
+    headers:
+      - name: User-Agent
+        value: insomnia/11.2.0
+    authentication:
+      type: bearer
+      token: "{{ _.token }}"
+      prefix: Bearer
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_0d39d492a50c23f0c017194e67a81f1a9d1151f8
+    created: 1750460513173
+    modified: 1750697368571
+  cookies:
+    - key: XSRF-TOKEN
+      value: eyJpdiI6ImVFbm5jUUFrS1AyUXpCQ2ExRmVqMXc9PSIsInZhbHVlIjoid05hTjFidnlReEQzRm5FY2tHbWZ6VlpEWlVHS3VpOHBKRWZuQXIvdUxsaHBlZXlvaUIwbWdLckJiN2lNVlk3NnRuTkVhcEVzWnNFUHpRaG1CS2J2YzVrRnhsd2NkU1BqY0tkNFFDaTVpVDJPMXFVUnZ2cHIzSno0YVNWVC9QR2EiLCJtYWMiOiI0MjUxZTQ3MjAxZTdiZWRmMzQwYzAzN2I0YzU4YWMxYmMxNTBhNzYxZDQ1NTZkZDJhMTVlNzYwOTQ2MDk1YmFiIiwidGFnIjoiIn0%3D
+      maxAge: 7200
+      domain: 127.0.0.1
+      path: /
+      hostOnly: true
+      creation: 2025-06-20T23:02:59.454Z
+      lastAccessed: 2025-06-23T16:49:28.547Z
+      sameSite: lax
+      id: b94d78b0-f307-4e01-8f5c-2668c9cf9570
+    - key: ciph3r_test_session
+      value: eyJpdiI6IjBOa3o2OG9UNmxnNW40L1Y5TkZZUWc9PSIsInZhbHVlIjoidkJrSm8wV0Vkd1FjRnpEdkE1VWNwSkFxYnVzZktuUDQ0VGRjWHFYSnprN2k1WVgrbVZ3U3hzenRUQklKYkJhejdGem1nZFVXZFVuM1hrRHYyYXVUbkxrdUJrRXl1NjI3Q3duQXpnSDdEWXRacGVOU2ZZTDI3ZW5QOXZTUmJBeWkiLCJtYWMiOiI0ZjVlYWNiNzEyOGFkODc4Y2Y4MmIxNGFlMzlhMmFjNzU0ZjlmM2Q2YzhmNTQzYmQ4MzIyYjIwOTRiMGQwNzg5IiwidGFnIjoiIn0%3D
+      maxAge: 7200
+      domain: 127.0.0.1
+      path: /
+      httpOnly: true
+      hostOnly: true
+      creation: 2025-06-20T23:02:59.458Z
+      lastAccessed: 2025-06-23T16:49:28.547Z
+      sameSite: lax
+      id: 9bd650c4-256c-480f-9537-4806b1b233f0
+    - key: laravel_session
+      value: eyJpdiI6ImtPaC9CSGticDEwNXNQRCtCTWd2U3c9PSIsInZhbHVlIjoiMHEvYTZLcjNmNU9wRUdYbm9RVy9VRUxDOWlkYTUrV3ZoMmdWZTBiOWROUkNuOVAwVUdJd0UrVlJOM3dVS3Q2U0t0dWhtcmV1T2h4eUF3eHlqNWlTS1JJaEdhMFlVWUNjYnZPNDc5ZEtraktScmNMWDJMb21YQm5nYTNoUkUzUmYiLCJtYWMiOiI0MTVhZmRhZTQzYWY1MTRmYjFiOWZkNDdmNjM1ZDMyN2JhOGU0YjVlNTFkMjBhYTE1YjcyN2E1MzlhMjVhYjExIiwidGFnIjoiIn0%3D
+      domain: 127.0.0.1
+      path: /
+      httpOnly: true
+      hostOnly: true
+      creation: 2025-06-23T01:34:23.867Z
+      lastAccessed: 2025-06-23T01:34:23.867Z
+      id: d8a1aa56-c69e-42d4-aec9-c3dbceae46fe
+    - id: af10649c-3cdb-4dde-9453-66a66430cbc3
+      key: XSRF-TOKEN
+      value: eyJpdiI6IlA5MUsrY1BDMlEzcm44OEVJYnRBM0E9PSIsInZhbHVlIjoiZ3hSSXRHWkdGSTZUMTlJTUtsc1gydWtIay9FVDVJaElObHJlUlZBc29pbkVpWlAxWlRTRGUxMHZzYXMvTHVCeVdiWjEydkcyUWJENkJDd1k2WTNISlErZlIrbk1HVXFSNUFLOHdDMTNsZ2tkWGd1NE5LV2I4eWRtTDBLbndjMDAiLCJtYWMiOiIxZTVlYjdiNDQwY2NhY2RjYzM2OGQzOWNkMGM3ZjEwNDExNjg1NDZhYTY0MzE0MzY5NzAzOTVkZTc0ZGU0ZGZlIiwidGFnIjoiIn0%3D
+      domain: 127.0.0.1
+      path: /
+      secure: false
+      httpOnly: false
+      creation: 2025-06-20T23:02:59.454Z
+      hostOnly: true
+      lastAccessed: 2025-06-23T16:47:23.381Z
+    - id: 037916da-f4de-47c3-92ea-002a7944e764
+      key: ciph3r_test_session
+      value: eyJpdiI6ImRQVy8xVnFjUGlhaU9nRXJHUlhDRFE9PSIsInZhbHVlIjoiai9LRkQrSlcxczd6OGI3cE1wTFVtaFgyRWpNUWxUWitQeHJqMU1kSktVVmFYdlJRL1lNcXpJVDl1dlV1UVNEMktYTVplVWU4b3hNS1Judkh6TGpaQzFjNFRIZjBzOFhsLzhpdkdIK2hQSHhNdlp5NGJpMjQyZFMybWsvWlBBL2YiLCJtYWMiOiJjZjE0YzU0ZWJiZGU4ZThlZjFhNTc2ODQyYWRlMmIyN2RmYzUxOGRjYTE1NjdhOWU3YmMyODc5NjUyMThjZTg3IiwidGFnIjoiIn0%3D
+      domain: 127.0.0.1
+      path: /
+      secure: false
+      httpOnly: true
+      creation: 2025-06-20T23:02:59.458Z
+      hostOnly: true
+      lastAccessed: 2025-06-23T16:47:23.381Z
+    - id: 7c77c7a3-ceb5-4c50-b071-dc0fe6aa3670
+      key: laravel_session
+      value: eyJpdiI6ImtPaC9CSGticDEwNXNQRCtCTWd2U3c9PSIsInZhbHVlIjoiMHEvYTZLcjNmNU9wRUdYbm9RVy9VRUxDOWlkYTUrV3ZoMmdWZTBiOWROUkNuOVAwVUdJd0UrVlJOM3dVS3Q2U0t0dWhtcmV1T2h4eUF3eHlqNWlTS1JJaEdhMFlVWUNjYnZPNDc5ZEtraktScmNMWDJMb21YQm5nYTNoUkUzUmYiLCJtYWMiOiI0MTVhZmRhZTQzYWY1MTRmYjFiOWZkNDdmNjM1ZDMyN2JhOGU0YjVlNTFkMjBhYTE1YjcyN2E1MzlhMjVhYjExIiwidGFnIjoiIn0%3D
+      domain: 127.0.0.1
+      path: /
+      secure: false
+      httpOnly: true
+      creation: 2025-06-23T01:34:23.867Z
+      hostOnly: true
+      lastAccessed: 2025-06-23T01:34:23.867Z
+environments:
+  name: Base Environment
+  meta:
+    id: env_0d39d492a50c23f0c017194e67a81f1a9d1151f8
+    created: 1750460513168
+    modified: 1750697368573
+    isPrivate: false
+  data:
+    baseurl: http://127.0.0.1:8000/api/
+    token: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzUwNjk3MzY4LCJleHAiOjE3NTA3MDA5NjgsIm5iZiI6MTc1MDY5NzM2OCwianRpIjoiN0o5c2xKVUV4UmFPQkl2VSIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3Iiwicm9sZSI6bnVsbH0.bj-Y0nXAmJ7DZ8X6n57KV9wHU2qQGMxLSQJxVn-bHrY
