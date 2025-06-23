@@ -6,7 +6,7 @@ Antes de comenzar, asegúrate de tener instalados los siguientes requisitos:
 - Composer
 - Node.js >= 16.x
 - NPM o Yarn
-- MySQL o cualquier base de datos compatible con Laravel
+- SQLite
 
 ## Pasos para levantar el proyecto en local
 
@@ -47,7 +47,7 @@ cp .env.example .env
 
 
 ### 6. Crear y migrar la base de datos
-Crea la base de datos en tu servidor MySQL y ejecuta las migraciones para crear las tablas necesarias:
+Este proyecto utiliza SQLite, ejecuta las migraciones para crear las tablas necesarias:
 ```bash
 php artisan migrate
 ```
